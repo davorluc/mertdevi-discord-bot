@@ -9,13 +9,17 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 
 client = commands.Bot(command_prefix='$')
 
+
 @client.event
-# Terminal: Notification when bot connects to server/guild
 async def on_ready():
-    print(f'{client.user} has connected to Discord!')
+    await client.change_presence(activity=discord.Game(';help for a list of Commands'))
+    print('Connected to bot: {}'.format(client.user.name))
+    print('Bot ID: {}'.format(client.user.id))
+
 
 @client.command()
 async def ping(ctx):
     await ctx.send(f'Pong! {round(client.latency * 1000)}ms')
+
 
 client.run(TOKEN)

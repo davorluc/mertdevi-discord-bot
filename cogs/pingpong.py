@@ -1,4 +1,6 @@
 from discord.ext import commands
+import discord
+import os
 
 class Ping(commands.Cog):
 
@@ -7,8 +9,8 @@ class Ping(commands.Cog):
 
     @commands.command()
     async def ping(self, ctx: commands.Context):
-        await ctx.send(f'Pong! {round(self.latency * 1000)}ms')
+        await ctx.send(f'Pong! {round(self.bot.latency * 1000)}ms')
 
 
 def setup(bot: commands.Bot):
-    bot.add_cog(Ping())
+    bot.add_cog(Ping(bot))

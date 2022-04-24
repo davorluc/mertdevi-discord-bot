@@ -7,14 +7,22 @@ from dotenv import load_dotenv
 load_dotenv()
 
 TOKEN = os.getenv("DISCORD_TOKEN")
+cogs = ["cogs.pingpong", ]
 
 client = commands.Bot(command_prefix='$')
-
 
 @client.event
 # Terminal: Notification when bot connects to server/guild
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
+    print("Loading cogs")
+
+    for cog in cogs:
+        try:
+            client.load_extension(cog)
+            print(cog + " was loaded.")
+        except Exception as e:
+            print(e)
 
 
 @client.event

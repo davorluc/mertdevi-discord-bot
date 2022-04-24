@@ -36,12 +36,12 @@ async def on_member_remove(member):
 
 # The following block of code is temporary. All subject to change.
 
-"""""
+
 @client.command()
 # Discord: Bot responds with "Polo!" and latency
 async def marco(ctx):
     await ctx.send(f'Polo! You just wasted {round(client.latency * 1000)} ms of my life. Congrats!')
-"""""
+
 
 @client.command()
 # Discord: Bot dies

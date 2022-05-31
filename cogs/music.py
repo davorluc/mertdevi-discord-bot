@@ -13,7 +13,7 @@ class Music(commands.Cog):
         self.is_paused = False
 
         self.music_queue = []
-        self.YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': True}
+        self.YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True'}
         self.FFMPEG_OPTIONS = {
             'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 
@@ -26,14 +26,17 @@ class Music(commands.Cog):
                                         item, download=False)['entries'][0]
             except Exception:
                 return False
+
         return {'source': info['formats'][0]['url'], 'title': info['title']}
 
     def play_next(self):
         if len(self.music_queue) > 0:
             self.is_playing = True
 
+            #get the first url
             m_url = self.music_queue[0][0]['source']
 
+            #remove the first element as you are currently playing it
             self.music_queue.pop(0)
 
             self.vc.play(discord.FFmpegPCMAudio(
@@ -44,24 +47,27 @@ class Music(commands.Cog):
     async def play_music(self, ctx):
         if len(self.music_queue) > 0:
             self.is_playing = True
+
             m_url = self.music_queue[0][0]['source']
 
+            #try to connect to voice channel if you are not already connected
             if self.vc == None or not self.vc.is_connected():
                 self.vc = await self.music_queue[0][1].connect()
 
+                #in case we fail to connect
                 if self.vc == None:
-                    await ctx.send("I can't play music like that, Dipshit")
+                    await ctx.send("Could not connect to the voice channel")
                     return
-                else:
-                    await self.vc.move_to(self.music_queue[0][1])
-
-                self.music_queue.pop(0)
-
-                self.vc.play(discord.FFmpegPCMAudio(
-                    m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
-
             else:
-                self.is_playing = False
+                await self.vc.move_to(self.music_queue[0][1])
+
+            #remove the first element as you are currently playing it
+            self.music_queue.pop(0)
+
+            self.vc.play(discord.FFmpegPCMAudio(
+                m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
+        else:
+            self.is_playing = False
 
     @commands.command(pass_context=True)
     async def join(self, ctx):
@@ -95,7 +101,7 @@ class Music(commands.Cog):
 
         voice_channel = ctx.author.voice.channel
         if voice_channel is None:
-            await ctx.send("How dou you expect me to play music when I'm not in a voice channel? Use $join. Or don't. I don't give a shit")
+            await ctx.send("How do you expect me to play music when I'm not in a voice channel? Use $join. Or don't. I don't give a shit")
         elif self.is_paused:
             self.vc.resume()
         else:

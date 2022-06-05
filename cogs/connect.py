@@ -12,6 +12,7 @@ class Connect(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
+        print("--------------------------------------")
         print(f'Chadbot has connected')
         print("--------------------------------------")
 

@@ -75,6 +75,7 @@ class Music(commands.Cog):
             channel = ctx.message.author.voice.channel
             await channel.connect()
             await ctx.send(f'AYO! We got a party in >>>{channel}<<<')
+            print("--------------------------------------")
             print("Chadbot has connected to a voice channel")
             print("--------------------------------------")
         else:
@@ -88,10 +89,12 @@ class Music(commands.Cog):
             self.is_playing = False
             await ctx.guild.voice_client.disconnect()
             await ctx.send("Bye, fucker")
+            print("--------------------------------------")
             print("Chadbot left a voice channel")
             print("--------------------------------------")
         else:
             await ctx.send("Dipshit, how am I gonna leave a voice channel if I'm not in one?")
+            print("--------------------------------------")
             print("User not in any voice channel. Chadbot can't leave")
             print("--------------------------------------")
 

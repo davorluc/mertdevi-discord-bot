@@ -19,3 +19,7 @@ $clear | Chadbot stops playing music and clears the queue
 $pause | Chadbot pauses the song.
 $resume | Chadbot resumes playing music.
 $skip | Chadbot skips the current song.
+
+
+## Easter Egg Hints
+- JoJo's reference

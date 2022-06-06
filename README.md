@@ -22,4 +22,5 @@ $skip | Chadbot skips the current song.
 
 
 ## Easter Egg Hints
-- JoJo's reference
+- JoJo's Bizarre Adventure
+- Racism

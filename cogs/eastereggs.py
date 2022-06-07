@@ -21,6 +21,7 @@ class Eastereggs(commands.Cog):
         if message.content in references:
             channel = message.channel
             await channel.send("https://c.tenor.com/vw7ogSgBWuYAAAAC/no-yes.gif")
+            await channel.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
             await self.client.process_commands(message)
 
     # someone calls someone else out as a racist. Chadbot responds in the most based way
@@ -41,14 +42,45 @@ class Eastereggs(commands.Cog):
                 "u r racist",
                 "You are a racist",
                 "You are such a racist",
-                "U are a racust",
-                "U r a racist2",
+                "U are a racist",
+                "U r a racist",
                 "You are racist",
                 "U are racist",
                 "U r racist"]
         if message.content in allegations:
             channel = message.channel
             await channel.send("https://c.tenor.com/4qD3O4fICuYAAAAC/ok-and.gif")
+            await channel.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
+            await self.client.process_commands(message)
+
+    # if someonw mentions that Messi (Pessi) is finished, Chadbot sends a SIUUU gif
+    @commands.Cog.listener("on_message")
+    async def goat(self, message):
+        factos = ["Pessi finished",
+                "pessi finished",
+                "Messi finished",
+                "messi finished",
+                "Pessi is finished",
+                "pessi is finished",
+                "Messi is finished",
+                "messi is finished",
+                "ronaldo > messi",
+                "Ronaldo > Messi",
+                "ronaldo > Messi",
+                "Ronaldo > messi",
+                "CR7 > Messi",
+                "cr7 > messi",
+                "CR7 > messi",
+                "cr7 > Messi",
+                "CR7 > LM10",
+                "cr7 > lm10",
+                "cr7 > LM10",
+                "CR7 > lm10",
+                ]
+        if message.content in factos:
+            channel = message.channel 
+            await channel.send("https://c.tenor.com/5tMQDJlcOcYAAAAC/siuuu.gif")
+            await channel.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
             await self.client.process_commands(message)
 
 def setup(client):

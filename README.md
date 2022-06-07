@@ -24,3 +24,4 @@ $skip | Chadbot skips the current song.
 ## Easter Egg Hints
 - JoJo's Bizarre Adventure
 - Racism
+- SIUUUU

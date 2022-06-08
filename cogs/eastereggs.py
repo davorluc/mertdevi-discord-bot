@@ -2,6 +2,23 @@
 import discord
 from discord.ext import commands
 
+"""
+    # Blueprint for text/message based easter eggs (copy/paste is possible)
+    # Code explanation: You fill the collection array with senteces or messages you want the easter egg to trigger
+    # if-statement checks if sent message is in the collection. If so, Chadbot could send a gif with a follow up
+    # message that an easter egg has been found.
+    # check code below for examples
+
+    @commands.Cog.listener("on_message")
+    async def placeholder(self, message):
+        collection = []
+        if message.content in collection:
+            channel = message.channel
+            await channel.send("something")
+            await channel.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
+            await self.client.process_commands(message)
+"""
+
 class Eastereggs(commands.Cog):
 
     def __init__(self, client):

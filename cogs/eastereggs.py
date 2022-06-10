@@ -1,6 +1,7 @@
 #eastereggs.py
 import discord
 from discord.ext import commands
+import json
 
 """
     # Blueprint for text/message based easter eggs (copy/paste is possible)
@@ -19,7 +20,12 @@ from discord.ext import commands
             await self.client.process_commands(message)
 """
 
+def write_json(data, filename = "cogs/easteregghunters.json"):
+    with open (filename, "w") as f:
+        json.dump(data, f, indent = 4)
+
 class Eastereggs(commands.Cog):
+
 
     def __init__(self, client):
         self.client = client
@@ -40,6 +46,19 @@ class Eastereggs(commands.Cog):
             await channel.send("https://c.tenor.com/vw7ogSgBWuYAAAAC/no-yes.gif")
             await channel.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
             await self.client.process_commands(message)
+            inJson = False
+            with open("cogs/easteregghunters.json") as file:
+                data = json.load(file)
+                temp = data["jojo"]
+            for i in range (len(temp) - 1):
+                if temp[i]["username"] == message.author:
+                    inJson = True
+                    return
+            if inJson == False:
+                username = str(message.author)
+                y = {"username": username}
+                temp.append(y)
+                write_json(data)
 
     # someone calls someone else out as a racist. Chadbot responds in the most based way
     @commands.Cog.listener("on_message")

@@ -40,8 +40,10 @@ class Eastereggs(commands.Cog):
                 "is this a jojos reference",
                 "Is this a JoJos reference?",
                 "is this a jojos reference?",
-                "Is this a Jojos reference"]
+                "Is this a Jojos reference",
+                "Is this a Jojos reference?"]
         if message.content in references:
+            username = str(message.author)
             channel = message.channel
             await channel.send("https://c.tenor.com/vw7ogSgBWuYAAAAC/no-yes.gif")
             await channel.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
@@ -50,12 +52,11 @@ class Eastereggs(commands.Cog):
             with open("cogs/easteregghunters.json") as file:
                 data = json.load(file)
                 temp = data["jojo"]
-            for i in range (len(temp) - 1):
-                if temp[i]["username"] == message.author:
+            for i in range (len(temp)):
+                if temp[i]['username'] == username:
                     inJson = True
-                    return
+                    return inJson
             if inJson == False:
-                username = str(message.author)
                 y = {"username": username}
                 temp.append(y)
                 write_json(data)

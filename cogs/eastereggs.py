@@ -85,10 +85,23 @@ class Eastereggs(commands.Cog):
                 "U are racist",
                 "U r racist"]
         if message.content in allegations:
+            username = str(message.author)
             channel = message.channel
             await channel.send("https://c.tenor.com/4qD3O4fICuYAAAAC/ok-and.gif")
             await channel.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
             await self.client.process_commands(message)
+            inJson = False
+            with open("cogs/easteregghunters.json") as file:
+                data = json.load(file)
+                temp = data["racist"]
+            for i in range (len(temp)):
+                if temp[i]['username'] == username:
+                    inJson = True
+                    return inJson
+            if inJson == False:
+                y = {"username": username}
+                temp.append(y)
+                write_json(data)
 
     # if someonw mentions that Messi (Pessi) is finished, Chadbot sends a SIUUU gif
     @commands.Cog.listener("on_message")
@@ -115,10 +128,23 @@ class Eastereggs(commands.Cog):
                 "CR7 > lm10",
                 ]
         if message.content in factos:
+            username = str(message.author)
             channel = message.channel 
             await channel.send("https://c.tenor.com/5tMQDJlcOcYAAAAC/siuuu.gif")
             await channel.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
             await self.client.process_commands(message)
+            inJson = False
+            with open("cogs/easteregghunters.json") as file:
+                data = json.load(file)
+                temp = data["sui"]
+            for i in range (len(temp)):
+                if temp[i]['username'] == username:
+                    inJson = True
+                    return inJson
+            if inJson == False:
+                y = {"username": username}
+                temp.append(y)
+                write_json(data)
 
 def setup(client):
     client.add_cog(Eastereggs(client))

@@ -1,4 +1,6 @@
-#eastereggs.py
+# eastereggs.py
+
+# imports
 import discord
 from discord.ext import commands
 import json
@@ -10,14 +12,41 @@ import json
     # message that an easter egg has been found.
     # check code below for examples
 
+    # makes the Cog.listener listen for on_messsge events
     @commands.Cog.listener("on_message")
+    # replace placeholder with your desired quote on quote command name. parameters stay the same
     async def placeholder(self, message):
+        # String array with on_message event triggers. you may change array name
         collection = []
+        # check if sent message in array
         if message.content in collection:
+            # saves user from sent message in variable username
+            username = message.author
+            # saves channel from sent message in variable channel
             channel = message.channel
+            # sents message in said channel. replace something with desired message (e.g. link to gif from tenor)
             await channel.send("something")
             await channel.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
             await self.client.process_commands(message)
+            # boolean variable that checks if user in Json file. False by default
+            inJson = False
+            # opens easteregghunters.json as file
+            with open("cogs/easteregghunters.json") as file:
+                data = json.load(file)
+                # only selects the easter egg we want to check. replace <json> with right list in json file. check in json file if not sure what to insert
+                temp = data["<json>"]
+            # loops through temp
+            for i in range (len(temp)):
+                # check if username at index i
+                if temp[i]['username'] == username:
+                    # returns true if it is in the file
+                    inJson = True
+                    return inJson
+            # appends to dictionary/json file if user not found
+            if inJson == False:
+                y = {"username": username}
+                temp.append(y)
+                write_json(data)
 """
 
 def write_json(data, filename = "cogs/easteregghunters.json"):
@@ -30,6 +59,9 @@ class Eastereggs(commands.Cog):
     def __init__(self, client):
         self.client = client
     
+    # all code explanation will be in the blueprint above, since it is the same for every easter egg
+    # if easter egg is based on a different blueprint, it will be in the code directly
+
     # If a user asks if this was a JoJo's reference, Chadbot confirm# If a user asks if this was a JoJo's reference, Chadbot confirms.
     @commands.Cog.listener("on_message")
     async def jojo(self, message):
@@ -60,6 +92,7 @@ class Eastereggs(commands.Cog):
                 y = {"username": username}
                 temp.append(y)
                 write_json(data)
+
 
     # someone calls someone else out as a racist. Chadbot responds in the most based way
     @commands.Cog.listener("on_message")

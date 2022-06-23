@@ -22,11 +22,9 @@ import json
         if message.content in collection:
             # saves user from sent message in variable username
             username = message.author
-            # saves channel from sent message in variable channel
-            channel = message.channel
-            # sents message in said channel. replace something with desired message (e.g. link to gif from tenor)
-            await channel.send("something")
-            await channel.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
+            # sends easteregg response as dm. replace something with desired message (e.g. link to gif from tenor)
+            await message.author.send("something")
+            await message.author.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
             await self.client.process_commands(message)
             # boolean variable that checks if user in Json file. False by default
             inJson = False
@@ -76,9 +74,8 @@ class Eastereggs(commands.Cog):
                 "Is this a Jojos reference?"]
         if message.content in references:
             username = str(message.author)
-            channel = message.channel
-            await channel.send("https://c.tenor.com/vw7ogSgBWuYAAAAC/no-yes.gif")
-            await channel.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
+            await message.author.send("https://c.tenor.com/vw7ogSgBWuYAAAAC/no-yes.gif")
+            await message.author.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
             await self.client.process_commands(message)
             inJson = False
             with open("cogs/easteregghunters.json") as file:
@@ -119,9 +116,8 @@ class Eastereggs(commands.Cog):
                 "U r racist"]
         if message.content in allegations:
             username = str(message.author)
-            channel = message.channel
-            await channel.send("https://c.tenor.com/4qD3O4fICuYAAAAC/ok-and.gif")
-            await channel.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
+            await message.author.send("https://c.tenor.com/4qD3O4fICuYAAAAC/ok-and.gif")
+            await message.author.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
             await self.client.process_commands(message)
             inJson = False
             with open("cogs/easteregghunters.json") as file:
@@ -162,9 +158,8 @@ class Eastereggs(commands.Cog):
                 ]
         if message.content in factos:
             username = str(message.author)
-            channel = message.channel 
-            await channel.send("https://c.tenor.com/5tMQDJlcOcYAAAAC/siuuu.gif")
-            await channel.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
+            await message.author.send("https://c.tenor.com/5tMQDJlcOcYAAAAC/siuuu.gif")
+            await message.author.send("Congrats sucker, you just found an easter egg. Go tell your mom or something. And tell her I said hi ;)")
             await self.client.process_commands(message)
             inJson = False
             with open("cogs/easteregghunters.json") as file:
